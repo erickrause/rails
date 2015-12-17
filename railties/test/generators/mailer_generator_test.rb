@@ -104,17 +104,11 @@ class MailerGeneratorTest < Rails::Generators::TestCase
       assert_match(%r(\sapp/views/notifier_mailer/bar\.html\.erb), view)
       assert_match(/<%= @greeting %>/, view)
     end
-
-    assert_file "app/views/layouts/mailer.html.erb" do |view|
-      assert_match(%r{<html>\n  <body>\n    <%= yield %>\n  </body>\n</html>}, view)
-    end
   end
 
   def test_invokes_default_template_engine_even_with_no_action
     run_generator ["notifier"]
     assert_file "app/views/notifier_mailer"
-    assert_file "app/views/layouts/mailer.text.erb"
-    assert_file "app/views/layouts/mailer.html.erb"
   end
 
   def test_logs_if_the_template_engine_cannot_be_found
